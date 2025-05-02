@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  bill_amount: 9.99
+  tip_percentage: 9.99
+  number_of_people: 1
+  tip_amount: 9.99
+  total_amount: 9.99
+
+two:
+  bill_amount: 9.99
+  tip_percentage: 9.99
+  number_of_people: 1
+  tip_amount: 9.99
+  total_amount: 9.99
