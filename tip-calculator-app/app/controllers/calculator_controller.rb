@@ -1,7 +1,7 @@
 class CalculatorController < ApplicationController
   
   def index
-    @calculation = TipCalculation.new 
+    @calculation = TipCalculate.new 
   end
 
   def calculate

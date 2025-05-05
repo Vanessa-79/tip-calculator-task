@@ -1,2 +1,65 @@
-<h1>Calculator#index</h1>
-<p>Find me in app/views/calculator/index.html.erb</p>
+<div class="calculator-container">
+  <h1>SPLITTER</h1>
+  <div class="calculator" data-controller="calculator">
+  
+    <!-- Left side -->
+    <!-- Bill input -->
+    <div class="bill-input">
+      <label for="bill">Bill</label>
+      <input type="number" 
+             id="bill" 
+             data-calculator-target="bill"
+             data-action="input->calculator#calculate"
+             placeholder="0">
+    </div>
+
+    <!-- Tip percentage section -->
+    <div class="tip-section">
+      <p>Select Tip %</p>
+      <div class="tip-grid">
+        <button class="tip-btn" data-calculator-target="tipBtn">5%</button>
+        <button class="tip-btn" data-calculator-target="tipBtn">10%</button>
+        <button class="tip-btn" data-calculator-target="tipBtn">15%</button>
+        <button class="tip-btn" data-calculator-target="tipBtn">25%</button>
+        <button class="tip-btn" data-calculator-target="tipBtn">50%</button>
+        <input type="number" placeholder="Custom" class="custom-tip" data-calculator-target="customTip" data-action="input->calculator#calculate">
+      </div>
+    </div>
+
+    <!-- People input -->
+    <div class="people-input">
+      <label for="people">Number of People</label>
+      <input type="number" 
+             id="people"
+             data-calculator-target="people"
+             data-action="input->calculator#calculate"
+             placeholder="0">
+    </div>
+
+    <!-- Right side -->
+    <!-- Results section -->
+    <div class="results-section">
+      <div class="amounts">
+        <!-- Tip Amount Display -->
+        <div class="amount-item">
+          <div class="amount-label">
+            <p>Tip Amount</p>
+            <span>/ person</span>
+          </div>
+          <p class="amount" data-calculator-target="tipAmount">$0.00</p>
+        </div>
+
+        <!-- Total Amount Display -->
+        <div class="amount-item">
+          <div class="amount-label">
+            <p>Total</p>
+            <span>/ person</span>
+          </div>
+          <p class="amount" data-calculator-target="total">$0.00</p>
+        </div>
+      </div>
+
+      <button class="reset-btn" data-action="click->calculator#reset">RESET</button>
+    </div>
+  </div>
+</div>
