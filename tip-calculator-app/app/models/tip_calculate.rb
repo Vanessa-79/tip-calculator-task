@@ -1,18 +1,34 @@
 class TipCalculate < ApplicationRecord
-    bill_amount: presence, greater_than: 0
-    tip_percentage: presence, between: 0, 100
-    number_of_people: presence, greater_than: 0
-    tip_amount: presence
-    total_amount: presence 
+  validates :bill_amount, presence: true, numericality: { greater_than: 0 }
+  validates :tip_percentage, presence: true, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }
+  validates :number_of_people, presence: true, numericality: { greater_than: 0 }
+  validates :tip_amount, presence: true
+  validates :total_amount, presence: true
 
 # Callbacks
-    beforre_validation: calculate_amounts
-    before_save: round_amounts
+    before_validation :calculate_amounts
+    before_save :round_amounts
 
 
 # private methods
-    calculate_amounts: computes tip and total per person
-    round_amounts: rounds monetary values to 2 decimals
+    private
+
+    # Calculate the tip and total amounts based on the input values
+    def calculate_amounts
+        return if bill_amount.blank? || tip_percentage.blank? || number_of_people.blank?
+        # Calculate the tip amount
+        self.tip_amount = (bill_amount * tip_percentage / 100.0) / number_of_people
+
+        # Calculate the total amount per person
+        self.total_amount = (bill_amount + (bill_amount * tip_percentage / 100.0)) / number_of_people
+    end
+
+    # Round the amounts to 2 decimal places
+    def round_amounts
+        self.tip_amount = tip_amount.round(2) 
+        self.total_amount = total_amount.round(2)
+    end
+
 
 
 
