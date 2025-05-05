@@ -8,3 +8,105 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+ :root {
+     /* Primary Colors */
+     --strong-cyan: hsl(172, 67%, 45%);
+
+     /* Neutral Colors */
+     --very-dark-cyan: hsl(183, 100%, 15%);
+     --dark-grayish-cyan: hsl(186, 14%, 43%);
+     --grayish-cyan: hsl(184, 14%, 56%);
+     --light-grayish-cyan: hsl(185, 41%, 84%);
+     --very-light-grayish-cyan: hsl(189, 41%, 97%);
+     --white: hsl(0, 0%, 100%);
+ }
+
+
+ body {
+     font-family: 'Space Mono', monospace;
+     background-color: var(--light-grayish-cyan);
+     min-height: 100vh;
+     margin: 0;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+ }
+
+ .calculator-container {
+     width: 100%;
+     max-width: 920px;
+     margin: 2rem;
+ }
+
+ .calculator {
+     background-color: var(--white);
+     padding: 2rem;
+     border-radius: 1.5rem;
+     display: grid;
+     grid-template-columns: 1fr 1fr;
+     gap: 2rem;
+     box-shadow: 0 20px 30px rgba(0, 0, 0, 0.05);
+ }
+
+ .input-section {
+     display: flex;
+     flex-direction: column;
+     gap: 2rem;
+ }
+
+ label,
+ .tip-section p {
+     color: var(--dark-grayish-cyan);
+     margin-bottom: 0.5rem;
+     display: block;
+ }
+
+ input[type="number"] {
+     width: 100%;
+     padding: 0.5rem;
+     background-color: var(--very-light-grayish-cyan);
+     border: 2px solid transparent;
+     border-radius: 5px;
+     text-align: right;
+     font-family: inherit;
+     font-size: 24px;
+     color: var(--very-dark-cyan);
+ }
+
+ .tip-grid {
+     display: grid;
+     grid-template-columns: repeat(3, 1fr);
+     gap: 1rem;
+ }
+
+ .tip-btn {
+     background-color: var(--very-dark-cyan);
+     color: var(--white);
+     border: none;
+     padding: 0.5rem;
+     border-radius: 5px;
+     font-family: inherit;
+     font-size: 24px;
+     cursor: pointer;
+     transition: all 0.2s ease;
+ }
+
+ .tip-btn:hover {
+     background-color: var(--strong-cyan);
+     color: var(--very-dark-cyan);
+ }
+
+ .custom-tip {
+     text-align: center;
+ }
+
+ .results-section {
+     background-color: var(--very-dark-cyan);
+     border-radius: 1rem;
+     padding: 2.5rem;
+     display: flex;
+     flex-direction: column;
+     justify-content: space-between;
+ }
