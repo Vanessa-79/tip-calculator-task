@@ -23,6 +23,20 @@
   </head>
 
   <body>
+    <nav class="main-nav">
+      <%= link_to 'Calculator', root_path %>
+      <% if admin_user_signed_in? %>
+        <%= link_to 'Admin Dashboard', admin_dashboard_path %>
+        <%= button_to 'Sign Out', destroy_admin_user_session_path, method: :delete %>
+      <% else %>
+        <%= link_to 'Admin Sign In', new_admin_user_session_path %>
+        <%= link_to 'Admin Sign Up', new_admin_user_registration_path %>
+      <% end %>
+    </nav>
+
+    <% if notice %><div class="notice"><%= notice %></div><% end %>
+    <% if alert %><div class="alert"><%= alert %></div><% end %>
+
     <%= yield %>
   </body>
 </html>
