@@ -1,0 +1,64 @@
+<div class="admin-dashboard">
+  <h1>Admin Dashboard</h1>
+
+  <!-- Statistics Section -->
+  <div class="dashboard-stats">
+    <div class="stat-card">
+      <h3>Total Tips</h3>
+      <p>$<%= number_with_precision(@total_tips, precision: 2) %></p>
+    </div>
+    <div class="stat-card">
+      <h3>Average Tip %</h3>
+      <p><%= number_with_precision(@average_tip_percentage, precision: 1) %>%</p>
+    </div>
+    <div class="stat-card">
+      <h3>Total Bills</h3>
+      <p>$<%= number_with_precision(@total_bills, precision: 2) %></p>
+    </div>
+  </div>
+
+  <!-- Date Filter -->
+  <div class="dashboard-filters">
+    <%= form_tag admin_dashboard_path, method: :get, class: 'date-filter-form' do %>
+      <div class="filter-group">
+        <%= label_tag :start_date, 'Start Date:' %>
+        <%= date_field_tag :start_date, @start_date.strftime('%Y-%m-%d') %>
+      </div>
+      <%= submit_tag 'Filter', class: 'filter-btn' %>
+    <% end %>
+  </div>
+
+  <!-- Calculations Table -->
+  <div class="calculations-table">
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Bill Amount</th>
+          <th>Tip %</th>
+          <th>Tip Amount</th>
+          <th>Total Bill</th>
+          <th>People</th>
+          <th>Per Person</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @calculations.each do |calc| %>
+          <tr>
+            <td><%= calc.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+            <td>$<%= number_with_precision(calc.bill_amount, precision: 2) %></td>
+            <td><%= number_with_precision(calc.tip_percentage, precision: 1) %>%</td>
+            <td>$<%= number_with_precision(calc.tip_amount, precision: 2) %></td>
+            <td>$<%= number_with_precision(calc.total_amount * calc.number_of_people, precision: 2) %></td>
+            <td><%= calc.number_of_people %></td>
+            <td>$<%= number_with_precision(calc.total_amount, precision: 2) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    
+    <div class="pagination">
+      <%= paginate @calculations %>
+    </div>
+  </div>
+</div>
