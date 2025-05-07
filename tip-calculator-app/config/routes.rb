@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
 # Defines the route for the index action of the calculator controller
   get "calculator/index" 
+  post "calculate", to: "calculator#calculate"
 
 
 
