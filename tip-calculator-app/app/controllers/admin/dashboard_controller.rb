@@ -3,13 +3,15 @@ class Admin::DashboardController < ApplicationController
   before_action :set_date_range, only: [:index]
 
   def index
+
+    # Fetch calculations within the specified date range
     @calculations = TipCalculate
       .where(created_at: @start_date..@end_date)
       .order(created_at: :desc)
       .page(params[:page])
       .per(10)  
       
-    # Calculate statistics
+    # Calculate total tips, average tip percentage, and total bills
     @total_tips = TipCalculate.where(created_at: @start_date..@end_date).sum(:tip_amount)
     @average_tip_percentage = TipCalculate.where(created_at: @start_date..@end_date).average(:tip_percentage)
     @total_bills = TipCalculate.where(created_at: @start_date..@end_date).sum('total_amount * number_of_people')

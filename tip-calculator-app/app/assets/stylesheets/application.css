@@ -22,26 +22,35 @@
     --white: hsl(0, 0%, 100%);
 }
 
-
 body {
     font-family: 'Space Mono', monospace;
     background-color: var(--light-grayish-cyan);
-    min-height: 100vh;
     margin: 0;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+
+
 }
 
 .calculator-container {
     width: 100%;
     max-width: 920px;
-    margin: 2rem;
+    padding: 2rem;
+}
+
+h1 {
+    text-align: center;
+    color: var(--very-dark-cyan);
+    margin-bottom: 2rem;
+    letter-spacing: 0.5rem;
 }
 
 .calculator {
-    background-color: var(--white);
+    background: var(--white);
     padding: 2rem;
     border-radius: 1.5rem;
     display: grid;
@@ -50,29 +59,57 @@ body {
     box-shadow: 0 20px 30px rgba(0, 0, 0, 0.05);
 }
 
-.input-section {
+.left-side {
     display: flex;
     flex-direction: column;
     gap: 2rem;
 }
 
-label,
-.tip-section p {
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+label {
     color: var(--dark-grayish-cyan);
-    margin-bottom: 0.5rem;
-    display: block;
+    font-weight: 700;
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+.input-wrapper span {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--grayish-cyan);
 }
 
 input[type="number"] {
     width: 100%;
     padding: 0.5rem;
-    background-color: var(--very-light-grayish-cyan);
+    background: var(--very-light-grayish-cyan);
     border: 2px solid transparent;
     border-radius: 5px;
     text-align: right;
     font-family: inherit;
     font-size: 24px;
     color: var(--very-dark-cyan);
+    font-weight: 700;
+}
+
+input[type="number"]:focus {
+    outline: none;
+    border-color: var(--strong-cyan);
+}
+
+.tip-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
 .tip-grid {
@@ -82,44 +119,63 @@ input[type="number"] {
 }
 
 .tip-btn {
-    background-color: var(--very-dark-cyan);
+    background: var(--very-dark-cyan);
     color: var(--white);
     border: none;
-    padding: 0.5rem;
+    padding: 0.75rem;
     border-radius: 5px;
     font-family: inherit;
     font-size: 24px;
+    font-weight: 700;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.2s;
 }
 
 .tip-btn:hover {
-    background-color: var(--strong-cyan);
+    background: var(--strong-cyan);
+    color: var(--very-dark-cyan);
+}
+
+.tip-btn.active {
+    background: var(--strong-cyan);
     color: var(--very-dark-cyan);
 }
 
 .custom-tip {
     text-align: center;
+    background: var(--very-light-grayish-cyan);
+    border: 2px solid transparent;
+    border-radius: 5px;
+    padding: 0.75rem;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--very-dark-cyan);
 }
 
-.results-section {
-    background-color: var(--very-dark-cyan);
+.right-side {
+    background: var(--very-dark-cyan);
     border-radius: 1rem;
     padding: 2.5rem;
+}
+
+.results {
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.amount-item {
+.amount-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 1.5rem;
 }
 
 .amount-label p {
     color: var(--white);
     margin: 0;
+    font-weight: 700;
 }
 
 .amount-label span {
@@ -130,21 +186,23 @@ input[type="number"] {
 .amount {
     color: var(--strong-cyan);
     font-size: 2.5rem;
+    font-weight: 700;
     margin: 0;
 }
 
 .reset-btn {
     width: 100%;
     padding: 0.75rem;
-    background-color: var(--strong-cyan);
+    background: var(--strong-cyan);
     border: none;
     border-radius: 5px;
     color: var(--very-dark-cyan);
     font-family: inherit;
     font-size: 1.25rem;
+    font-weight: 700;
     text-transform: uppercase;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.2s;
 }
 
 .reset-btn:disabled {
@@ -153,101 +211,54 @@ input[type="number"] {
 }
 
 .reset-btn:not(:disabled):hover {
-    background-color: var(--light-grayish-cyan);
+    background: var(--light-grayish-cyan);
 }
 
-/* Navigation and Flash Messages */
-.main-nav {
-    background-color: var(--very-dark-cyan);
-    padding: 1rem 2rem;
-    display: flex;
-    justify-content: flex-end;
-    gap: 1rem;
-    align-items: center;
-}
-
-.main-nav a,
-.main-nav button {
-    color: var(--white);
-    text-decoration: none;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    transition: all 0.2s ease;
-}
-
-.main-nav a:hover {
-    background-color: var(--strong-cyan);
-    color: var(--very-dark-cyan);
-}
-
-.main-nav button {
-    background: var(--strong-cyan);
-    border: none;
-    color: var(--very-dark-cyan);
-    font-family: inherit;
-    font-size: 1rem;
-    cursor: pointer;
-}
-
-.main-nav button:hover {
-    background-color: var(--light-grayish-cyan);
-}
-
-.notice,
-.alert {
-    padding: 1rem;
-    margin: 1rem;
-    border-radius: 5px;
-    text-align: center;
-}
-
-.notice {
-    background-color: var(--light-grayish-cyan);
-    color: var(--very-dark-cyan);
-}
-
-.alert {
-    background-color: #ffebee;
-    color: #c62828;
-}
-
-/* Error Message Styles */
 .error-message {
-    color: #dc3545;
-    font-size: 0.875rem;
-    margin-top: 0.5rem;
+    color: #E57373;
+    text-align: center;
+    margin-top: 1rem;
     padding: 0.5rem;
-    border-radius: 4px;
-    background-color: rgba(220, 53, 69, 0.1);
+    border-radius: 5px;
+    background: rgba(229, 115, 115, 0.1);
 }
 
 .error-message.hidden {
     display: none;
 }
 
-.input-error {
-    border-color: #dc3545 !important;
+@media (max-width: 768px) {
+    .calculator {
+        grid-template-columns: 1fr;
+    }
+
+    .tip-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
-/* Input Validation Styles */
-input[type="number"].error {
-    border-color: #dc3545;
-    background-color: #fff;
-}
 
-/* Admin Dashboard Stats */
+/* Admin Dashboard Styles */
+
 .dashboard-stats {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    display: flex;
+    justify-content: space-between;
     gap: 1.5rem;
     margin-bottom: 2rem;
+    
 }
 
 .stat-card {
+    flex: 1;
     background-color: var(--white);
     padding: 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border-left: 4px solid var(--strong-cyan);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
 }
 
@@ -260,15 +271,115 @@ input[type="number"].error {
 .stat-card p {
     color: var(--very-dark-cyan);
     font-size: 2rem;
+    font-weight: 700;
     margin: 0;
-    font-weight: bold;
 }
 
-/* Dashboard Filters */
+.stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Different border colors for different stat cards */
+.stat-card:nth-child(1) {
+    border-left-color: var(--strong-cyan);
+}
+
+.stat-card:nth-child(2) {
+    border-left-color: #6B8E23;
+    
+}
+
+.stat-card:nth-child(3) {
+    border-left-color: #4682B4;
+    
+}
+
+/* Navigation Styling */
+.main-nav {
+    width: 100%;
+    margin-top: 0;
+    background-color: var(--very-dark-cyan);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.main-nav a {
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 700;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    transition: background-color 0.2s;
+}
+
+.main-nav a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.main-nav .active {
+    background-color: var(--strong-cyan);
+    color: var(--very-dark-cyan);
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.main-nav button {
+    background-color: var(--strong-cyan);
+    color: var(--very-dark-cyan);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-family: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.main-nav button:hover {
+    background-color: var(--light-grayish-cyan);
+}
+
+/* Alert and Notice styling */
+.alert,
+.notice {
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: 700;
+}
+
+.notice {
+    background-color: rgba(76, 175, 80, 0.1);
+    color: #4CAF50;
+    border: 1px solid #4CAF50;
+}
+
+.alert {
+    background-color: rgba(244, 67, 54, 0.1);
+    color: #F44336;
+    border: 1px solid #F44336;
+}
+
+/* Filter section styling */
 .dashboard-filters {
-    background-color: var(--very-light-grayish-cyan);
-    padding: 1.5rem;
-    border-radius: 8px;
     margin-bottom: 2rem;
 }
 
@@ -276,6 +387,10 @@ input[type="number"].error {
     display: flex;
     align-items: center;
     gap: 1rem;
+    background-color: var(--white);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .filter-group {
@@ -284,12 +399,26 @@ input[type="number"].error {
     gap: 0.5rem;
 }
 
+.filter-group label {
+    color: var(--dark-grayish-cyan);
+    font-weight: 700;
+}
+
+.filter-group input[type="date"] {
+    padding: 0.5rem;
+    border: 1px solid var(--light-grayish-cyan);
+    border-radius: 5px;
+    font-family: inherit;
+}
+
 .filter-btn {
     background-color: var(--strong-cyan);
     color: var(--very-dark-cyan);
     border: none;
     padding: 0.5rem 1rem;
-    border-radius: 4px;
+    border-radius: 5px;
+    font-family: inherit;
+    font-weight: 700;
     cursor: pointer;
     transition: background-color 0.2s;
 }
@@ -298,96 +427,183 @@ input[type="number"].error {
     background-color: var(--light-grayish-cyan);
 }
 
-/* Calculations Table */
+/* Admin Dashboard Title */
+.admin-dashboard h1 {
+    text-align: center;
+    color: var(--very-dark-cyan);
+    margin: 2rem 0;
+    letter-spacing: 0.2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .dashboard-stats {
+        flex-direction: column;
+    }
+
+    .main-nav {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    .nav-right,
+    .nav-left {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .date-filter-form {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+/* Admin Dashboard Table Styles */
 .calculations-table {
     background-color: var(--white);
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
     overflow-x: auto;
+    margin-bottom: 2rem;
 }
 
 .calculations-table table {
     width: 100%;
     border-collapse: collapse;
+    font-family: 'Space Mono', monospace;
 }
 
-.calculations-table th,
-.calculations-table td {
-    padding: 1rem;
-    text-align: left;
-    border-bottom: 1px solid var(--light-grayish-cyan);
+.calculations-table thead {
+    background-color: var(--very-light-grayish-cyan);
 }
 
 .calculations-table th {
-    background-color: var(--very-light-grayish-cyan);
-    color: var(--dark-grayish-cyan);
-    font-weight: bold;
-}
-
-.calculations-table tr:hover {
-    background-color: var(--very-light-grayish-cyan);
-}
-
-/* Pagination Styles */
-.pagination {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    margin-top: 2rem;
-}
-
-.pagination span {
-    display: inline-flex;
-    align-items: center;
-}
-
-.pagination a {
+    padding: 1rem;
+    text-align: left;
     color: var(--very-dark-cyan);
-    text-decoration: none;
-    padding: 0.5rem 1rem;
+    font-weight: 700;
+    border-bottom: 2px solid var(--light-grayish-cyan);
+}
+
+.calculations-table tbody tr {
+    border-bottom: 1px solid var(--very-light-grayish-cyan);
+    transition: background-color 0.2s ease;
+}
+
+.calculations-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.calculations-table tbody tr:hover {
     background-color: var(--very-light-grayish-cyan);
-    border-radius: 5px;
-    transition: all 0.2s ease;
 }
 
-.pagination a:hover {
-    background-color: var(--strong-cyan);
-    color: var(--white);
-}
-
-.pagination .current {
-    padding: 0.5rem 1rem;
-    background-color: var(--strong-cyan);
-    color: var(--white);
-    border-radius: 5px;
-}
-
-.pagination .gap {
-    padding: 0.5rem;
+.calculations-table td {
+    padding: 1rem;
     color: var(--dark-grayish-cyan);
 }
 
-/* Responsive Design */
+/* Amount columns styling */
+.calculations-table td:nth-child(2),
+.calculations-table td:nth-child(4),
+.calculations-table td:nth-child(5),
+.calculations-table td:nth-child(7) {
+    font-weight: 700;
+    color: var(--very-dark-cyan);
+}
+
+/* Tip percentage styling */
+.calculations-table td:nth-child(3) {
+    font-weight: 700;
+    color: var(--strong-cyan);
+}
+
+/* Add more spacing to the Date column */
+.calculations-table th:first-child,
+.calculations-table td:first-child {
+    padding-left: 1.5rem;
+}
+
+/* Add more spacing to the last column */
+.calculations-table th:last-child,
+.calculations-table td:last-child {
+    padding-right: 1.5rem;
+}
+
+/* Empty state message */
+.empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--grayish-cyan);
+}
+
+.empty-state p {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+/* Responsive adjustments for small screens */
 @media (max-width: 768px) {
-    .calculator {
-        grid-template-columns: 1fr;
+    .calculations-table {
+        padding: 1rem 0.5rem;
     }
 
-    .tip-grid {
-        grid-template-columns: repeat(2, 1fr);
+    .calculations-table th,
+    .calculations-table td {
+        padding: 0.75rem 0.5rem;
+        font-size: 0.9rem;
     }
 
-    .dashboard-stats {
-        grid-template-columns: 1fr;
+    .calculations-table th:first-child,
+    .calculations-table td:first-child {
+        padding-left: 1rem;
     }
 
-    .date-filter-form {
-        flex-direction: column;
-        align-items: stretch;
+    .calculations-table th:last-child,
+    .calculations-table td:last-child {
+        padding-right: 1rem;
     }
+}
 
-    .filter-group {
-        flex-direction: column;
-        align-items: stretch;
-    }
+/* Alternative striped rows design (optional) */
+/* Uncomment this if you prefer striped rows instead of hover effect */
+/*
+.calculations-table tbody tr:nth-child(even) {
+    background-color: var(--very-light-grayish-cyan);
+}
+*/
+
+/* Enhanced title for the table section */
+.admin-dashboard h2 {
+    color: var(--very-dark-cyan);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Additional stats card enhancements */
+.stat-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border-left: 4px solid var(--strong-cyan);
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Different border colors for different stat cards */
+.stat-card:nth-child(1) {
+    border-left-color: var(--strong-cyan);
+}
+
+.stat-card:nth-child(2) {
+    border-left-color: #6B8E23;
+    /* Olive green */
+}
+
+.stat-card:nth-child(3) {
+    border-left-color: #4682B4;
+    /* Steel blue */
 }
